@@ -22,16 +22,16 @@ export const ProjectListScreen = () => {
     const [users, setUsers] = useState([])
 
     // custom hook
-    
+    const debouncedParam = useDebounce(param, 2000)
 
     // initialize: load List from backend
     useEffect(() => {
-        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async response => {
+        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async response => {
             if(response.ok) {
                 setList(await response.json())
             }
         })
-    }, [param])
+    }, [debouncedParam])
 
     // init users
     useMount(() => {

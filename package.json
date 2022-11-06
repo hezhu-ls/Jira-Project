@@ -25,7 +25,8 @@
     "prepare": "husky install",
     "json-server": "json-server __json_server_mock__/db.json --watch --port 3001",
     "prepare": "husky install",
-    "create-hook": "husky add .husky/pre-commit \"npm test\""
+    "create-hook": "husky add .husky/pre-commit \"npm test\"",
+    "test:staged": "CI=true npm test"
   },
   "eslintConfig": {
     "extends": [
@@ -54,7 +55,10 @@
     "prettier": "2.7.1"
   },
   "lint-staged": {
-    "*.{js,css,md,ts,tsx}": "prettier --write"
+    "*.{js,css,md,ts,tsx}": [
+      "prettier --write",
+      "npm run test:staged"
+    ]
   },
   "husky": {
     "hooks": {
